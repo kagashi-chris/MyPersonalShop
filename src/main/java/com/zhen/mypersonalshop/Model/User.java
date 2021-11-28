@@ -24,10 +24,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(unique = true)
     private String email;
 
     @Column(name = "pass")
     private String password;
+
+    @Column(unique = true)
     private String username;
 
     @OneToMany(mappedBy = "user")

@@ -12,9 +12,9 @@ public class Item {
 
     @Id
     private int id;
-
+    private int amount;
+    private String itemName;
     private int cost;
-    private String detail;
 
     @ManyToOne
     @JsonIgnore
@@ -28,6 +28,22 @@ public class Item {
         this.id = id;
         this.cost = cost;
         this.detail = detail;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
     public int getId() {
@@ -52,5 +68,17 @@ public class Item {
 
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", amount=" + amount +
+                ", itemName='" + itemName + '\'' +
+                ", cost=" + cost +
+                ", detail='" + detail + '\'' +
+                ", user=" + user +
+                '}';
     }
 }
