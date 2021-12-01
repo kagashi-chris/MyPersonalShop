@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import java.util.Set;
 
 @Entity
 public class Item {
@@ -18,16 +20,14 @@ public class Item {
 
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "user_id")
     private User user;
 
     public Item() {
     }
 
-    public Item(int id, int cost, String detail) {
+    public Item(int id, int cost) {
         this.id = id;
         this.cost = cost;
-        this.detail = detail;
     }
 
     public int getAmount() {
@@ -62,13 +62,6 @@ public class Item {
         this.cost = cost;
     }
 
-    public String getDetail() {
-        return detail;
-    }
-
-    public void setDetail(String detail) {
-        this.detail = detail;
-    }
 
     @Override
     public String toString() {
@@ -77,7 +70,6 @@ public class Item {
                 ", amount=" + amount +
                 ", itemName='" + itemName + '\'' +
                 ", cost=" + cost +
-                ", detail='" + detail + '\'' +
                 ", user=" + user +
                 '}';
     }

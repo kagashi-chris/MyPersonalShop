@@ -11,7 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
 
 @RestController
-public class ShopingCartController {
+public class CartController {
 
 //    @GetMapping(value = {"/users/{userId}/cart"})
 //    public User getUser(@PathVariable int userId){
@@ -22,4 +22,6 @@ public class ShopingCartController {
 //        }
 //        return user.get();
 //    }
+
+
 }
