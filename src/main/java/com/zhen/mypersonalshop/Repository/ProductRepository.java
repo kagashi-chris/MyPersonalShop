@@ -1,22 +1,22 @@
 package com.zhen.mypersonalshop.Repository;
 
-import com.zhen.mypersonalshop.Model.Item;
+import com.zhen.mypersonalshop.Model.Product;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface CartRepository extends CrudRepository<Item, Integer> {
+public interface ProductRepository extends CrudRepository<Product, Integer> {
 
     @Override
-    <S extends Item> S save(S entity);
+    <S extends Product> S save(S entity);
 
     @Override
-    Optional<Item> findById(Integer integer);
+    Optional<Product> findById(Integer integer);
 
     @Override
-    Iterable<Item> findAll();
+    Iterable<Product> findAll();
 
     @Override
     void deleteById(Integer integer);

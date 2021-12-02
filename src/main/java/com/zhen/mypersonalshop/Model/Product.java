@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import java.util.Set;
 
 @Entity
-public class Item {
+public class Product {
 
     @Id
     private int id;
@@ -22,10 +22,10 @@ public class Item {
     @JsonIgnore
     private User user;
 
-    public Item() {
+    public Product() {
     }
 
-    public Item(int id, int cost) {
+    public Product(int id, int cost) {
         this.id = id;
         this.cost = cost;
     }
