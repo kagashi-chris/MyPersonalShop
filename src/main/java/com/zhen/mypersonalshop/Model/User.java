@@ -32,9 +32,7 @@ public class User {
 
     @Column(unique = true)
     private String username;
-
-    @OneToMany(mappedBy = "user")
-    private List<Product> shoppingCartList;
+    
 
     @OneToMany(cascade = CascadeType.ALL)
     @JsonIgnore

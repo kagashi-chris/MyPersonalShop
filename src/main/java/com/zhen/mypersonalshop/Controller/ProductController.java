@@ -1,9 +1,8 @@
 package com.zhen.mypersonalshop.Controller;
 
-
-import com.zhen.mypersonalshop.Model.Cart;
+import com.zhen.mypersonalshop.Model.Product;
 import com.zhen.mypersonalshop.Model.User;
-import com.zhen.mypersonalshop.Service.CartService;
+import com.zhen.mypersonalshop.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,12 +13,13 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
 
 @RestController
-public class CartController {
+public class ProductController {
 
     @Autowired
-    private CartService cartService;
+    private ProductService productService;
 
-//    @GetMapping(value = {"/users/{userId}/cart"})
+    //fetch user from database using the value /users/{userId}. will throw a 404 response if userId not found.
+//    @GetMapping(value = {"/users/{userId}"})
 //    public User getUser(@PathVariable int userId){
 //        Optional<User> user = userService.getUser(userId);
 //        if(user.isEmpty())
@@ -29,10 +29,14 @@ public class CartController {
 //        return user.get();
 //    }
 
-//    @GetMapping(value = {"/users/{userId}/cart/{cartId}"})
-//    public Cart getCart(@PathVariable int userId, int cartId){
-//
-//    }
-
-
+    @GetMapping(value = {"/products/{productId}"})
+    public Product getProduct(@PathVariable int productId)
+    {
+        Optional<Product> product = productService.getProduct(productId);
+        if(product.isEmpty())
+        {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "404 product not in database!");
+        }
+        return product.get();
+    }
 }

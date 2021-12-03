@@ -2,48 +2,37 @@ package com.zhen.mypersonalshop.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.util.Set;
 
 @Entity
+@Table(name="products")
 public class Product {
 
     @Id
     private int id;
-    private int amount;
-    private String itemName;
-    private int cost;
 
-    @ManyToOne
-    @JsonIgnore
-    private User user;
+    @Column(unique = true, name = "product_name")
+    private String productName;
+
+    @Column(name = "price")
+    private int price;
 
     public Product() {
     }
 
-    public Product(int id, int cost) {
-        this.id = id;
-        this.cost = cost;
+    public String getproductName() {
+        return productName;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public String getItemName() {
-        return itemName;
-    }
-
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
+    public void setproductName(String productName) {
+        this.productName = productName;
     }
 
     public int getId() {
@@ -54,12 +43,12 @@ public class Product {
         this.id = id;
     }
 
-    public int getCost() {
-        return cost;
+    public int getprice() {
+        return price;
     }
 
-    public void setCost(int cost) {
-        this.cost = cost;
+    public void setprice(int price) {
+        this.price = price;
     }
 
 
@@ -67,10 +56,8 @@ public class Product {
     public String toString() {
         return "Item{" +
                 "id=" + id +
-                ", amount=" + amount +
-                ", itemName='" + itemName + '\'' +
-                ", cost=" + cost +
-                ", user=" + user +
+                ", productName='" + productName + '\'' +
+                ", price=" + price +
                 '}';
     }
 }

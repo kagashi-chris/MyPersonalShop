@@ -1,7 +1,6 @@
 package com.zhen.mypersonalshop.Service;
 
 import com.zhen.mypersonalshop.Model.Product;
-import com.zhen.mypersonalshop.Model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

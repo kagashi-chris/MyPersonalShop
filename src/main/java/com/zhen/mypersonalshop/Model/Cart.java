@@ -1,5 +1,7 @@
 package com.zhen.mypersonalshop.Model;
 
+import net.minidev.json.annotate.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,14 +20,31 @@ public class Cart {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
+    @JsonIgnore
     private Product product;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     private int amount;
 
+    public Cart() {
+    }
+
+    public Cart(Product product, User user, int amount) {
+        this.product = product;
+        this.user = user;
+        this.amount = amount;
+    }
+
+    public Cart(int id, Product product, User user, int amount) {
+        this.id = id;
+        this.product = product;
+        this.user = user;
+        this.amount = amount;
+    }
 
     public int getId() {
         return id;
