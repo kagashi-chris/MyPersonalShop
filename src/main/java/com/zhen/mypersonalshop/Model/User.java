@@ -32,18 +32,21 @@ public class User {
 
     @Column(unique = true)
     private String username;
-    
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JsonIgnore
-    @JoinTable(
-            name = "cart",
-            joinColumns = @JoinColumn(
-                    name="user_id",
-                    referencedColumnName = "id"
-            )
-    )
-    Set<Product> productSet;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    Set<Cart> cart;
+
+
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JsonIgnore
+//    @JoinTable(
+//            name = "cart",
+//            joinColumns = @JoinColumn(
+//                    name="user_id",
+//                    referencedColumnName = "id"
+//            )
+//    )
+//    Set<Product> productSet;
 
 //    @ManyToMany(cascade = CascadeType.ALL)
 //    @JsonIgnore

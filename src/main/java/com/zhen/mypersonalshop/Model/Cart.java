@@ -2,6 +2,7 @@ package com.zhen.mypersonalshop.Model;
 
 import net.minidev.json.annotate.JsonIgnore;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,14 +21,13 @@ public class Cart {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    @JsonIgnore
     private Product product;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonIgnore
     private User user;
 
+    @Column(name = "amount")
     private int amount;
 
     public Cart() {

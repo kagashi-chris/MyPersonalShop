@@ -9,7 +9,7 @@ import java.util.Optional;
 @Service
 public interface CartService {
 
-    public Cart addOrUpdateCart(Cart cart);
+    public Cart addToCart(int userId, int productId);
     public Optional<Cart> getCart(int id);
     public Iterable<Cart> getAllUsers();
     public void deleteCart(int id);
