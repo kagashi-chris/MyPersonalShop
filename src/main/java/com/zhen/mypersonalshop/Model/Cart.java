@@ -1,5 +1,6 @@
 package com.zhen.mypersonalshop.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.Column;
@@ -10,21 +11,26 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "cart")
-public class Cart {
+public class Cart implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
+    @Id
     @ManyToOne
     @JoinColumn(name = "product_id")
+    @JsonIgnoreProperties(value = "cart", allowSetters = true)
     private Product product;
 
+    @Id
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties(value = "cart", allowSetters = true)
     private User user;
 
     @Column(name = "amount")
@@ -46,11 +52,11 @@ public class Cart {
         this.amount = amount;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -87,4 +93,19 @@ public class Cart {
                 ", amount=" + amount +
                 '}';
     }
+
+//    @Override
+//    public boolean equals(Object o)
+//    {
+//        if(this == o)
+//        {
+//            return true;
+//        }
+//        if(o == null || getClass() != o.getClass())
+//        {
+//            return false;
+//        }
+//
+//
+//    }
 }

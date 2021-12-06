@@ -1,6 +1,8 @@
 package com.zhen.mypersonalshop.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.CascadeType;
@@ -9,10 +11,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import java.util.List;
 import java.util.Set;
 
@@ -22,54 +27,45 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
+    @Email
     private String email;
 
-    @Column(name = "pass")
+    /**
+     * password for this user. Can not be null and is not allowed to be displayed
+     */
+    @Column(name = "pass", nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    @Column(unique = true)
+
+    /**
+     * username can not be null and must be unique
+     */
+    @Column(nullable = false, unique = true)
     private String username;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(value = "user" , allowSetters = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     Set<Cart> cart;
 
-
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JsonIgnore
-//    @JoinTable(
-//            name = "cart",
-//            joinColumns = @JoinColumn(
-//                    name="user_id",
-//                    referencedColumnName = "id"
-//            )
-//    )
-//    Set<Product> productSet;
-
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JsonIgnore
-//    @JoinTable(
-//            name = "group_followers",
-//            joinColumns = @JoinColumn(
-//                    name = "user_id",
-//                    referencedColumnName = "id"
-//            ),
-//            inverseJoinColumns = @JoinColumn(
-//                    name = "group_chat_id",
-//                    referencedColumnName = "id"
-//            )
-//    )
 
     public User() {
     }
 
-    public int getId() {
+    public User(@Email String email, String password, String username) {
+        this.email = email;
+        this.password = password;
+        this.username = username;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -17,13 +17,13 @@ import java.util.Set;
 public class Product {
 
     @Id
-    private int id;
+    private long id;
 
     @Column(unique = true, name = "product_name")
     private String productName;
 
     @Column(name = "price")
-    private int price;
+    private long price;
 
     @OneToMany(mappedBy = "product")
     Set<Cart> cart;
@@ -39,19 +39,19 @@ public class Product {
         this.productName = productName;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getprice() {
+    public long getprice() {
         return price;
     }
 
-    public void setprice(int price) {
+    public void setprice(long price) {
         this.price = price;
     }
 
