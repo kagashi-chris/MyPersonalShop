@@ -1,25 +1,24 @@
 package com.zhen.mypersonalshop.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 
+
 @Entity
 @Table(name = "cart")
+@IdClass(CartId.class)
 public class Cart implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
 
     @Id
     @ManyToOne
@@ -94,18 +93,18 @@ public class Cart implements Serializable {
                 '}';
     }
 
-//    @Override
-//    public boolean equals(Object o)
-//    {
-//        if(this == o)
-//        {
-//            return true;
-//        }
-//        if(o == null || getClass() != o.getClass())
-//        {
-//            return false;
-//        }
-//
-//
-//    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Cart)) return false;
+        Cart cart = (Cart) o;
+        return getProduct().equals(cart.getProduct()) && getUser().equals(cart.getUser());
+    }
+
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+
 }

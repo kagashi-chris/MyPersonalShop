@@ -1,6 +1,7 @@
 package com.zhen.mypersonalshop.Service;
 
 import com.zhen.mypersonalshop.Model.Cart;
+import com.zhen.mypersonalshop.Model.CartId;
 import com.zhen.mypersonalshop.Model.Product;
 import com.zhen.mypersonalshop.Model.User;
 import com.zhen.mypersonalshop.Repository.CartRepository;
@@ -9,6 +10,7 @@ import com.zhen.mypersonalshop.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 
+import java.util.List;
 import java.util.Optional;
 
 public class CartServiceImpl implements CartService{
@@ -25,34 +27,27 @@ public class CartServiceImpl implements CartService{
 
     //gets the user and product using their ID. Throw resource not found exception if empty.
     @Override
-    public Cart addToCart(int userId, int productId) {
-        Optional<User> u = userRepository.findById(userId);
-        if(!u.isPresent())
+    public Cart addToCart(long userId, long productId) {
+        Optional<User> user = userRepository.findById(userId);
+        if(!user.isPresent())
         {
             throw new ResourceNotFoundException("user id " + userId + " not found!");
         }
-        Optional<Product> p = productRepository.findById(productId);
-        if(!p.isPresent())
+        Optional<Product> product = productRepository.findById(productId);
+        if(!product.isPresent())
         {
             throw new ResourceNotFoundException("product id " + productId + " not found!");
         }
 
-//        Optional<Cart> cartItem = cartRepository.findById()
-        return null;
+        Cart workingCart = cartRepository.findById(new CartId(userId, productId)).orElse(new Cart(product.get(),user.get(),0));
+        workingCart.setAmount(workingCart.getAmount()+1);
+        return cartRepository.save(workingCart);
     }
 
     @Override
-    public Optional<Cart> getCart(int id) {
-        return cartRepository.findById(id);
-    }
+    public void removeFromCart(long userId, long productId) {
 
-    @Override
-    public Iterable<Cart> getAllUsers() {
-        return cartRepository.findAll();
-    }
-
-    @Override
-    public void deleteCart(int id) {
-        cartRepository.deleteById(id);
     }
 }
+
+
