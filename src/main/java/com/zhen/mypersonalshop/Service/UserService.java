@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface UserService {
 
     public User saveOrCreateAccount(User user);
-    public Optional<User> getUser(int id);
+    public Optional<User> getUser(long id);
     public Iterable<User> getAllUsers();
-    public void deleteAccount(int id);
+    public void deleteAccount(long id);
 }

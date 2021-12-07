@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Optional<User> getUser(int id) {
+    public Optional<User> getUser(long id) {
         return userRepository.findById(id);
     }
 
@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void deleteAccount(int id) {
+    public void deleteAccount(long id) {
         userRepository.deleteById(id);
     }
 }

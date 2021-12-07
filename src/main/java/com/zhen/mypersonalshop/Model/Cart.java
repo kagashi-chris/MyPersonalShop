@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
@@ -15,7 +13,7 @@ import java.io.Serializable;
 
 
 @Entity
-@Table(name = "cart")
+@Table(name = "carts")
 @IdClass(CartId.class)
 public class Cart implements Serializable {
 
@@ -44,20 +42,7 @@ public class Cart implements Serializable {
         this.amount = amount;
     }
 
-    public Cart(int id, Product product, User user, int amount) {
-        this.id = id;
-        this.product = product;
-        this.user = user;
-        this.amount = amount;
-    }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public Product getProduct() {
         return product;
@@ -86,7 +71,6 @@ public class Cart implements Serializable {
     @Override
     public String toString() {
         return "Cart{" +
-                "id=" + id +
                 ", product=" + product +
                 ", user=" + user +
                 ", amount=" + amount +
