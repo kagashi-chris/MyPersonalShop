@@ -18,6 +18,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -47,9 +48,9 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
 
-    @JsonIgnoreProperties(value = "user" , allowSetters = true)
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    Set<Cart> cart;
+    @JsonIgnoreProperties(value = "user" , allowSetters = true)
+    private Set<Cart> cart = new HashSet<>();
 
 
     public User() {
@@ -59,6 +60,10 @@ public class User {
         this.email = email;
         this.password = password;
         this.username = username;
+    }
+
+    public Set<Cart> getCart() {
+        return cart;
     }
 
     public long getId() {

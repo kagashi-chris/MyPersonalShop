@@ -25,6 +25,12 @@ public class CartServiceImpl implements CartService{
     private CartRepository cartRepository;
 
 
+//    @Override
+//    public List<Cart> getCartsWithId(long userId) {
+//        User user = findUser(userId);
+//        cartRepository.findById(new CartId(userId));
+//    }
+
     //gets the user and product using their ID. Throw resource not found exception if empty.
     @Override
     public Cart addToCart(long userId, long productId) {

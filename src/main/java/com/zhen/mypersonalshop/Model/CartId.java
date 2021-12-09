@@ -16,6 +16,10 @@ public class CartId implements Serializable {
     public CartId() {
     }
 
+    public CartId(long user) {
+        this.user = user;
+    }
+
     public CartId(long user, long product) {
         this.user = user;
         this.product = product;

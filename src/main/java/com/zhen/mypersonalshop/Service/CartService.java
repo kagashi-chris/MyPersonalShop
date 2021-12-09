@@ -11,7 +11,8 @@ import java.util.Optional;
 @Service
 public interface CartService {
 
-    public Cart addToCart(long userId, long productId);
-    public Cart removeFromCart(long userId, long productId);
+//    List<Cart> getCartsWithId(long userId);
+    Cart addToCart(long userId, long productId);
+    Cart removeFromCart(long userId, long productId);
 
 }

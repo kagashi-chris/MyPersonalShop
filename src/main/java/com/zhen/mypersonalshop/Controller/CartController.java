@@ -4,6 +4,7 @@ package com.zhen.mypersonalshop.Controller;
 import com.zhen.mypersonalshop.Model.Cart;
 import com.zhen.mypersonalshop.Model.User;
 import com.zhen.mypersonalshop.Service.CartService;
+import com.zhen.mypersonalshop.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -25,6 +27,17 @@ public class    CartController {
 
     @Autowired
     private CartService cartService;
+
+    @Autowired
+    private UserService userService;
+
+    @GetMapping(value = "/users/{userId}")
+    public ResponseEntity<?> getCartListByUser(@PathVariable long userId)
+    {
+        User u = userService.getUser(userId);
+        System.out.println(u.getCart());
+        return new ResponseEntity<>(u, HttpStatus.OK);
+    }
 
 
     @PutMapping(value = "/add/users/{userId}/products/{productId}")
