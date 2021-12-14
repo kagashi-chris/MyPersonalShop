@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -20,6 +22,7 @@ import java.util.Set;
 public class Product {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column(unique = true, name = "product_name")
@@ -35,11 +38,11 @@ public class Product {
     public Product() {
     }
 
-    public String getproductName() {
+    public String getProductName() {
         return productName;
     }
 
-    public void setproductName(String productName) {
+    public void setProductName(String productName) {
         this.productName = productName;
     }
 
@@ -51,11 +54,11 @@ public class Product {
         this.id = id;
     }
 
-    public long getprice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setprice(long price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 

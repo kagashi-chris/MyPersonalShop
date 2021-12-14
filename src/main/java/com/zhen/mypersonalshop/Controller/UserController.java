@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -22,6 +23,18 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    /**
+     * checks if database already has a user with the same email or username. If not then it will proceed to create
+     * and save a new user to the database
+     * @param user
+     * @return
+     */
+    @PostMapping(value = "/users")
+    public ResponseEntity<?> createUser(@Valid @RequestBody User user)
+    {
+        User newUser = userService.saveUser(user);
+        return new ResponseEntity<>(newUser, HttpStatus.OK);
+    }
 
     //fetch user from database using the value /users/{userId}. will throw a 404 response if userId not found.
     @GetMapping(value = {"/users/{userId}"})
@@ -38,36 +51,25 @@ public class UserController {
         return new ResponseEntity<>(userList, HttpStatus.OK);
     }
 
-    //create and save user to database. If user already exist then it will return null.
-    @PostMapping(value = "/users")
-    public ResponseEntity<?> createUser(@RequestBody User user)
-    {
-//        try{
-//            userService.saveUser(user);
-//        }
-//
-//        //make more specific exception SQLException
-//        catch (Exception e) {
-//            return null;
-//        }
-//        return user;
-    }
 
-    //update user base on userID
+    /**
+     * first checks if user with userId exist in data then update user base on whatever information is added
+     * @param userId
+     * @param user
+     * @return ResponseEntity with User and HttpStatus OK
+     */
     @PutMapping(value={"/users/{userId}"})
-    public ResponseEntity<?> updateAccount(@PathVariable int userId, @RequestBody User user)
+    public ResponseEntity<?> updateAccount(@PathVariable long userId, @Valid @RequestBody User user)
     {
-        User u = userService.getUser(userId);
-        u.setUsername(user.getUsername());
-        u.setEmail(user.getEmail());
-        u.setPassword(user.getPassword());
-        return userService.saveUser(u);
+        User activeUser = userService.updateUser(user,userId);
+        return new ResponseEntity<>(activeUser, HttpStatus.OK);
     }
 
     //delete user base of the input userID
     @DeleteMapping(value={"/users/{userId}"})
     public void deleteAccount(@PathVariable int userId)
     {
+        User activeUser = userService.getUser(userId);
         userService.deleteAccount(userId);
     }
 

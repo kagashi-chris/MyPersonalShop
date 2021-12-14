@@ -8,10 +8,10 @@ import java.util.Optional;
 @Service
 public interface ProductService {
 
-    public Product saveOrCreateProduct(Product product);
-    public Optional<Product> getProduct(long id);
-    public Iterable<Product> getAllProducts();
-    public void deleteProduct(long id);
+    Product saveOrCreateProduct(Product product);
+    Optional<Product> getProduct(long id);
+    Iterable<Product> getAllProducts();
+    void deleteProduct(long id);
 
 
 }

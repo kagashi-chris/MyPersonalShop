@@ -12,5 +12,6 @@ public interface UserService {
     public User saveUser(User user);
     public User getUser(long id);
     public List<User> getAllUsers();
+    public User updateUser(User user, long id);
     public void deleteAccount(long id);
 }

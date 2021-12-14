@@ -30,6 +30,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    /**
+     * username can not be null and must be unique
+     */
     @Column(unique = true, nullable = false)
     @Email
     private String email;
