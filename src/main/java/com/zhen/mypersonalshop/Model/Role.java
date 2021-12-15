@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="role")
+@Table(name="roles")
 public class Role {
 
     @Id
@@ -24,9 +24,9 @@ public class Role {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "userRole", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties(value = "userRole", allowSetters = true)
-    private Set<UserRole> userRoles = new HashSet<>();
+//    @OneToMany(mappedBy = "userRole", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonIgnoreProperties(value = "userRole", allowSetters = true)
+//    private Set<UserRole> userRoles = new HashSet<>();
 
     public Role() {
     }
@@ -47,20 +47,20 @@ public class Role {
         this.name = name;
     }
 
-    public Set<UserRole> getUserRoles() {
-        return userRoles;
-    }
-
-    public void setUserRoles(Set<UserRole> userRoles) {
-        this.userRoles = userRoles;
-    }
+//    public Set<UserRole> getUserRoles() {
+//        return userRoles;
+//    }
+//
+//    public void setUserRoles(Set<UserRole> userRoles) {
+//        this.userRoles = userRoles;
+//    }
 
     @Override
     public String toString() {
         return "Role{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", userRoles=" + userRoles +
+//                ", userRoles=" + userRoles +
                 '}';
     }
 }
