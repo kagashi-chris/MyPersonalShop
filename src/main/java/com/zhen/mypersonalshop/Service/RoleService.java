@@ -9,7 +9,7 @@ import java.util.List;
 public interface RoleService {
 
     Role addRole(Role role);
-    Role getRole(int id);
+    Role getRole(long id);
     Role getRoleByName(String name);
     List<Role> getAllRoles();
     Role updateRole(Role role);
