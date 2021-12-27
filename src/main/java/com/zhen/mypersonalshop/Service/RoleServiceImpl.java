@@ -6,6 +6,7 @@ import com.zhen.mypersonalshop.Repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,16 +53,36 @@ public class RoleServiceImpl implements RoleService{
 
     @Override
     public List<Role> getAllRoles() {
-        return null;
+        List<Role> roleList = new ArrayList<>();
+        for(Role role: roleRepository.findAll())
+        {
+            roleList.add(role);
+        }
+        return roleList;
     }
 
     @Override
-    public Role updateRole(Role role) {
-        return null;
+    public Role updateRole(Role role, long id) {
+        Optional<Role> activeRole = roleRepository.findById(id);
+        if(!activeRole.isPresent())
+        {
+            throw new ResourceNotFoundException("Role id " + id + " not found!");
+        }
+        if(role.getName() != null)
+        {
+            activeRole.get().setName(role.getName());
+        }
+        return roleRepository.save(activeRole.get());
+
     }
 
     @Override
-    public void deleteRole() {
-
+    public void deleteRole(long id) {
+        Optional<Role> role = roleRepository.findById(id);
+        if(!role.isPresent())
+        {
+            throw new ResourceNotFoundException("Role " + id + " with id not found");
+        }
+        roleRepository.delete(role.get());
     }
 }
