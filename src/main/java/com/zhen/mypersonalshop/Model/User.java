@@ -55,6 +55,10 @@ public class User {
     @JsonIgnoreProperties(value = "user" , allowSetters = true)
     private Set<Cart> cart = new HashSet<>();
 
+    @OneToMany(mappedBy ="user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = "user", allowSetters = true)
+    private Set<UserRole> userRoleSet = new HashSet<>();
+
 
     public User() {
     }

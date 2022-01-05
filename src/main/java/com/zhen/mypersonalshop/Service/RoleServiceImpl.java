@@ -83,6 +83,7 @@ public class RoleServiceImpl implements RoleService{
         {
             throw new ResourceNotFoundException("Role " + id + " with id not found");
         }
+
         roleRepository.delete(role.get());
     }
 }

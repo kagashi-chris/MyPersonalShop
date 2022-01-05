@@ -42,8 +42,6 @@ public class Cart implements Serializable {
         this.amount = amount;
     }
 
-
-
     public Product getProduct() {
         return product;
     }

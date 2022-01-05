@@ -24,6 +24,10 @@ public class Role {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = "role", allowSetters = true)
+    private Set<UserRole> userSet = new HashSet<>();
+
     public Role() {
     }
 
